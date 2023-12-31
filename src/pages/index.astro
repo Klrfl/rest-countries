@@ -1,16 +1,19 @@
 ---
-const title = "REST Countries"
+import data from "../data.json";
+import BaseHead from "../components/BaseHead.astro";
+const title = "REST Countries";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<h1>{title}</h1>
-	</body>
+  <head>
+    <BaseHead {title} />
+  </head>
+  <body>
+    <h1>{title}</h1>
+    {
+      data.map((country) => {
+        return <p>{country}</p>;
+      })
+    }
+  </body>
 </html>
