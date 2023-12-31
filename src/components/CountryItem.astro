@@ -1,31 +1,47 @@
 ---
+import { slugify } from "../scripts/utils";
 const { country } = Astro.props;
 const { flag, name, capital, population, region } = country;
 ---
 
 <li>
-  <figure class="country-card">
-    <picture>
-      <img src={flag} alt={`Flag of ${name}`} width="200" />
-    </picture>
-    <figcaption>
-      <h3>{name}</h3>
-      <p>population {population}</p>
-      <p>region {region}</p>
-      <p>capital {capital}</p>
-    </figcaption>
-  </figure>
+  <a href={slugify(name)}>
+    <figure class="country-card">
+      <picture>
+        <img src={flag} alt={`Flag of ${name}`} width="200" height="100" />
+      </picture>
+      <figcaption>
+        <h3>{name}</h3>
+        <p>population {population}</p>
+        <p>region {region}</p>
+        <p>capital {capital}</p>
+      </figcaption>
+    </figure>
+  </a>
 </li>
 
 <style>
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .country-card {
     padding: 0.5rem;
     margin: 0;
     outline: 2px solid #ddd;
     height: 100%;
+
+    display: flex;
+    flex-direction: column;
   }
 
   .country-card img {
     width: 100%;
+    height: auto;
+  }
+
+  .country-card figcaption {
+    margin-block: auto 0;
   }
 </style>
