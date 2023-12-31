@@ -11,12 +11,19 @@ const title = "Where in the world?";
   </head>
 
   <body>
-    <header>
-      <h1>{title}</h1>
-      <button>light mode</button>
-    </header>
     <main>
-      <header><select name="" id=""></select></header>
+      <header class="filters-wrapper">
+        <input type="search" placeholder="Indonesia" required />
+        <select name="" id="">
+          <option value="" selected disabled>Filter by region</option>
+          <option value="africa">Africa</option>
+          <option value="america">America</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="oceania">Oceania</option>
+        </select>
+      </header>
+
       <ul class="country-list">
         {data.map((country) => <CountryItem country={country} />)}
       </ul>
