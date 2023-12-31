@@ -1,19 +1,40 @@
 ---
 import data from "../data.json";
+import CountryItem from "../components/CountryItem.astro";
 import BaseHead from "../components/BaseHead.astro";
-const title = "REST Countries";
+const title = "Where in the world?";
 ---
 
 <html lang="en">
   <head>
     <BaseHead {title} />
   </head>
+
   <body>
-    <h1>{title}</h1>
-    {
-      data.map((country) => {
-        return <p>{country}</p>;
-      })
-    }
+    <header>
+      <h1>{title}</h1>
+      <button>light mode</button>
+    </header>
+    <main>
+      <header><select name="" id=""></select></header>
+      <ul class="country-list">
+        {data.map((country) => <CountryItem country={country} />)}
+      </ul>
+    </main>
+    <style>
+      main {
+        padding: 2rem;
+        max-width: 200ch;
+      }
+
+      .country-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40ch, 1fr));
+        gap: 2rem;
+      }
+    </style>
   </body>
 </html>
