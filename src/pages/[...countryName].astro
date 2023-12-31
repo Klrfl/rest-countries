@@ -1,0 +1,67 @@
+---
+import { slugify } from "../scripts/utils";
+import data from "../data.json";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import type { GetStaticPaths } from "astro";
+export const getStaticPaths = (() => {
+  const pages = data.map((country) => {
+    return {
+      params: { countryName: slugify(country.name) },
+      props: { country },
+    };
+  });
+  return pages;
+}) satisfies GetStaticPaths;
+
+const { country } = Astro.props;
+---
+
+<BaseLayout title={country.name}>
+  <main>
+    <header>
+      <a href="/">back</a>
+    </header>
+
+    <figure class="country">
+      <picture>
+        <img src={country.flag} alt={`Flag of ${country.name}`} width="500" />
+      </picture>
+      <figcaption>
+        <h1>{country.name}</h1>
+        <p>Native name: {country.nativeName}</p>
+        <p>population: {country.population}</p>
+        <p>region: {country.region}</p>
+        <p>subregion: {country.subregion}</p>
+        <p>capital: {country.capital}</p>
+        <p>Top level domain: {country.topLevelDomain}</p>
+        <p>
+          currencies: <ul>
+            {country.currencies.map((currency) => <li>{currency.name}</li>)}
+          </ul>
+        </p>
+        {
+          country.borders && (
+            <>
+              <p>border countries:</p>
+              <ul>
+                {country.borders.map((border) => (
+                  <li>{border}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </figcaption>
+    </figure>
+  </main>
+</BaseLayout>
+
+<style>
+  .country {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+</style>

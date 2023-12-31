@@ -11,6 +11,11 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <h1>{title}</h1>
+    <header>
+      <h1>Where in the world?</h1>
+      <button>light mode</button>
+    </header>
+
+    <slot />
   </body>
 </html>
