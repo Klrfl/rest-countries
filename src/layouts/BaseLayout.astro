@@ -1,21 +1,24 @@
 ---
+import TopHeader from "../components/TopHeader.astro";
+import BaseHead from "../components/BaseHead.astro";
 const { title } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <BaseHead {title} />
   </head>
-  <body>
-    <header>
-      <h1>Where in the world?</h1>
-      <button>light mode</button>
-    </header>
 
-    <slot />
-  </body>
+  <body>
+    <TopHeader />
+    <main>
+      <slot />
+    </main>
+  </body><style>
+    main {
+      padding: 2rem;
+      max-width: 200ch;
+      margin-inline: auto;
+    }
+  </style>
 </html>

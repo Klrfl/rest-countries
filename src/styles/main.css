@@ -1,1 +1,7 @@
-@import "base.css";
+body {
+  font-family: "Arial", sans-serif;
+}
+
+:is(input, button, select):hover {
+  cursor: pointer;
+}

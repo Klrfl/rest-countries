@@ -1,47 +1,41 @@
 ---
 import data from "../data.json";
+
 import CountryItem from "../components/CountryItem.astro";
-import BaseHead from "../components/BaseHead.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 const title = "Where in the world?";
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead {title} />
-  </head>
+<BaseLayout {title}>
+  <header class="filters-wrapper">
+    <input type="search" placeholder="Indonesia" required />
+    <select name="" id="">
+      <option value="" selected disabled>Filter by region</option>
+      <option value="africa">Africa</option>
+      <option value="america">America</option>
+      <option value="asia">Asia</option>
+      <option value="europe">Europe</option>
+      <option value="oceania">Oceania</option>
+    </select>
+  </header>
 
-  <body>
-    <main>
-      <header class="filters-wrapper">
-        <input type="search" placeholder="Indonesia" required />
-        <select name="" id="">
-          <option value="" selected disabled>Filter by region</option>
-          <option value="africa">Africa</option>
-          <option value="america">America</option>
-          <option value="asia">Asia</option>
-          <option value="europe">Europe</option>
-          <option value="oceania">Oceania</option>
-        </select>
-      </header>
+  <ul class="country-list">
+    {data.map((country) => <CountryItem country={country} />)}
+  </ul>
+</BaseLayout>
 
-      <ul class="country-list">
-        {data.map((country) => <CountryItem country={country} />)}
-      </ul>
-    </main>
-    <style>
-      main {
-        padding: 2rem;
-        max-width: 200ch;
-      }
+<style>
+  .filters-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
 
-      .country-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(40ch, 1fr));
-        gap: 2rem;
-      }
-    </style>
-  </body>
-</html>
+  .country-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40ch, 1fr));
+    gap: 2rem;
+  }
+</style>

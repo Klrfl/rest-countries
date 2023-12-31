@@ -1,3 +1,36 @@
+:root {
+  --dark-gray: hsl(0, 0%, 52%);
+  --very-light-gray: hsl(0, 0%, 98%);
+  --white: hsl(0, 0%, 100%);
+
+  --dark-blue: hsl(209, 23%, 22%);
+  --very-dark-blue: hsl(207, 26%, 17%);
+  --very-dark-blue: hsl(200, 15%, 8%);
+}
+
+[data-klrfl-country-theme="light"] {
+  /*
+ - Dark Gray (Light Mode Input): hsl(0, 0%, 52%)
+ - Very Light Gray (Light Mode Background): hsl(0, 0%, 98%)
+ - White (Dark Mode Text & Light Mode Elements): hsl(0, 0%, 100%)
+ */
+
+  --background: var(--white);
+  --element: var(--white);
+  --text: var(--white);
+}
+
+[data-klrfl-country-theme="dark"] {
+  /*
+ - Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
+ - Very Dark Blue (Dark Mode Background): hsl(207, 26%, 17%)
+ - Very Dark Blue (Light Mode Text): hsl(200, 15%, 8%)
+ */
+  --background: var(--very-dark-blue);
+  --element: var(--dark-blue);
+  --text: var(--very-dark-blue);
+}
+
 *,
 *::before,
 *::after {
@@ -7,6 +40,7 @@
 * {
   margin: 0;
 }
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +59,7 @@ input,
 button,
 textarea,
 select {
+  all: unset;
   font: inherit;
 }
 
@@ -36,4 +71,8 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+:is(button, input, select):is(:focus-visible, :hover) {
+  outline: 2px dotted dodgerblue;
 }
