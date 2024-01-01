@@ -4,7 +4,6 @@
   --white: hsl(0, 0%, 100%);
 
   --dark-blue: hsl(209, 23%, 22%);
-  --very-dark-blue: hsl(207, 26%, 17%);
   --very-dark-blue: hsl(200, 15%, 8%);
 }
 
@@ -15,12 +14,15 @@
  - Very Dark Blue (Light Mode Text): hsl(200, 15%, 8%)
  */
 
-  --background: var(--white);
+  --background: var(--very-light-gray);
   --element: var(--white);
   --text: var(--very-dark-blue);
+
+  --shadow: hsl(0deg 0% 0% / 0.075);
 }
 
 [data-klrfl-country-theme="dark"] {
+  --very-dark-blue: hsl(207, 26%, 17%);
   /*
  - Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
  - Very Dark Blue (Dark Mode Background): hsl(207, 26%, 17%)
@@ -29,6 +31,8 @@
   --background: var(--very-dark-blue);
   --element: var(--dark-blue);
   --text: var(--white);
+
+  --shadow: var(--very-dark-blue);
 }
 
 *,

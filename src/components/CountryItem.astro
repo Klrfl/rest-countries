@@ -12,9 +12,9 @@ const { flag, name, capital, population, region } = country;
       </picture>
       <figcaption>
         <h3>{name}</h3>
-        <p>population {population}</p>
-        <p>region {region}</p>
-        <p>capital {capital}</p>
+        <p><span>population:</span> {population}</p>
+        <p><span>region:</span> {region}</p>
+        <p><span>capital:</span> {capital}</p>
       </figcaption>
     </figure>
   </a>
@@ -27,13 +27,23 @@ const { flag, name, capital, population, region } = country;
   }
 
   .country-card {
-    padding: 0.5rem;
+    background: var(--element);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-size: 0.875rem;
     margin: 0;
-    outline: 2px solid #ddd;
     height: 100%;
+
+    box-shadow:
+      0 2px 5px var(--shadow),
+      2px 4px 8px var(--shadow);
 
     display: flex;
     flex-direction: column;
+  }
+
+  .country-card:hover {
+    filter: invert(0.05);
   }
 
   .country-card img {
@@ -43,5 +53,10 @@ const { flag, name, capital, population, region } = country;
 
   .country-card figcaption {
     margin-block: auto 0;
+    padding: 2rem;
+  }
+
+  .country-card figcaption span {
+    font-weight: bold;
   }
 </style>
