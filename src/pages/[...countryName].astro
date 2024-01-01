@@ -21,7 +21,7 @@ const { country } = Astro.props;
 <BaseLayout title={country.name}>
   <main>
     <header>
-      <a href="/">back</a>
+      <a class="back-link" href="/">back</a>
     </header>
 
     <figure class="country">
@@ -37,20 +37,27 @@ const { country } = Astro.props;
         <p>capital: {country.capital}</p>
         <p>Top level domain: {country.topLevelDomain}</p>
         <p>
-          currencies: <ul>
-            {country.currencies.map((currency) => <li>{currency.name}</li>)}
+          currencies:
+          <ul>
+            {
+              country.currencies ? (
+                country.currencies.map((currency) => <li>{currency.name}</li>)
+              ) : (
+                <li>none</li>
+              )
+            }
           </ul>
         </p>
         {
           country.borders && (
-            <>
-              <p>border countries:</p>
+            <p>
+              border countries:
               <ul>
                 {country.borders.map((border) => (
                   <li>{border}</li>
                 ))}
               </ul>
-            </>
+            </p>
           )
         }
       </figcaption>
@@ -59,9 +66,21 @@ const { country } = Astro.props;
 </BaseLayout>
 
 <style>
+  main header {
+    margin-block-end: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    background: var(--element);
+    color: inherit;
+    text-decoration: none;
+    padding: 1rem 2rem;
+  }
+
   .country {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
   }
 </style>

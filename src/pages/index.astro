@@ -8,8 +8,14 @@ const title = "Where in the world?";
 
 <BaseLayout {title}>
   <header class="filters-wrapper">
-    <input type="search" placeholder="Indonesia" required />
-    <select name="" id="">
+    <input
+      type="search"
+      placeholder="Search for a country..."
+      name="search-input"
+      class="search-input"
+      required
+    />
+    <select name="search-filter" class="search-filter">
       <option value="" selected disabled>Filter by region</option>
       <option value="africa">Africa</option>
       <option value="america">America</option>
@@ -28,6 +34,16 @@ const title = "Where in the world?";
   .filters-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-block-end: 2rem;
+  }
+
+  .filters-wrapper > * {
+    border-radius: 0.5rem;
+    background: var(--element);
+    padding: 1rem 2rem;
+    box-shadow:
+      0 1px 5px var(--shadow),
+      2px 4px 8px var(--shadow);
   }
 
   .country-list {
