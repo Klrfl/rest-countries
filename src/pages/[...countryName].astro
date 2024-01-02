@@ -17,68 +17,91 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { country } = Astro.props;
+
+// borders
+function getBorderingCountriesData() {
+  const result = [];
+  for (const borderingCountry of country.borders) {
+    data.forEach((country) => {
+      if (country.alpha3Code === borderingCountry) result.push(country);
+    });
+  }
+
+  return result;
+}
+
+const borderingCountries = getBorderingCountriesData();
 ---
 
-<BaseLayout title={country.name}>
-  <main>
-    <header>
-      <a class="back-link" href="/">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>back</span>
-      </a>
-    </header>
+<BaseLayout title={`${country.name} - Where in the World?`}>
+  <header>
+    <a class="back-link" href="/">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>back</span>
+    </a>
+  </header>
 
-    <figure class="country">
-      <picture>
-        <img src={country.flag} alt={`Flag of ${country.name}`} width="500" />
-      </picture>
-      <figcaption>
-        <h1>{country.name}</h1>
-        <p>Native name: {country.nativeName}</p>
-        <p>population: {country.population}</p>
-        <p>region: {country.region}</p>
-        <p>subregion: {country.subregion}</p>
-        <p>capital: {country.capital}</p>
-        <p>Top level domain: {country.topLevelDomain}</p>
+  <figure class="country">
+    <picture>
+      <img src={country.flag} alt={`Flag of ${country.name}`} height="600" />
+    </picture>
+    <figcaption>
+      <h2>{country.name}</h2>
+      <section class="section-1">
+        <p><span>Native name:</span> {country.nativeName}</p>
+        <p><span>population:</span> {country.population.toLocaleString()}</p>
+        <p><span>region:</span> {country.region}</p>
+        <p><span>subregion:</span> {country.subregion}</p>
+      </section>
+
+      <section class="section-2">
+        <p><span>capital:</span> {country.capital}</p>
+        <p><span>Top level domain:</span> {country.topLevelDomain}</p>
         <p>
-          currencies:
-          <ul>
+          <span>currencies:</span>
+          {country.currencies.map((currency) => currency.name).join(", ")}
+        </p>
+        <p>
+          <span>languages:</span>
+          {country.languages.map((language) => language.name).join(", ")}
+        </p>
+      </section>
+
+      <section class="section-border">
+        <p>
+          <span> border countries:</span>
+          <ul class="border-countries">
             {
-              country.currencies ? (
-                country.currencies.map((currency) => <li>{currency.name}</li>)
+              borderingCountries.length ? (
+                borderingCountries.map((country) => (
+                  <li>
+                    <a class="border-country" href={slugify(country.name)}>
+                      {country.name}
+                    </a>
+                  </li>
+                ))
               ) : (
                 <li>none</li>
               )
             }
           </ul>
         </p>
-        {
-          country.borders && (
-            <p>
-              border countries:
-              <ul>
-                {country.borders.map((border) => (
-                  <li>{border}</li>
-                ))}
-              </ul>
-            </p>
-          )
-        }
-      </figcaption>
-    </figure>
-  </main>
+      </section>
+    </figcaption>
+  </figure>
 </BaseLayout>
 
 <style>
-  main header {
+  header {
     margin-block-end: 2rem;
   }
 
   .back-link {
     background: var(--element);
+    border-radius: 0.5rem;
     color: inherit;
     text-decoration: none;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
 
     box-shadow:
       0 1px 2px var(--shadow),
@@ -92,7 +115,75 @@ const { country } = Astro.props;
 
   .country {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 2rem;
+  }
+
+  .country picture {
+    flex: 3 1 0;
+  }
+  .country img {
+    width: 100%;
+    height: auto;
+  }
+
+  .country figcaption {
+    flex: 4 1 0;
+
+    display: grid;
+    grid-template-areas: "title" "section-1" "section-2" "section-border";
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .country h2 {
+    grid-area: title;
+  }
+
+  .section-1 {
+    grid-area: section-1;
+  }
+  .section-2 {
+    grid-area: section-2;
+  }
+  .section-border {
+    grid-area: section-border;
+  }
+
+  .country p span {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  @media screen and (min-width: 55em) {
+    .country {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .country figcaption {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: "title title" "section-1 section-2" "section-border section-border";
+    }
+  }
+
+  .border-countries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .border-country {
+    background: var(--element);
+    border-radius: 0.5rem;
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 2px 4px var(--shadow);
   }
 </style>
