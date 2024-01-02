@@ -39,9 +39,14 @@ if (searchFilter) {
           placeholder="Search for a country..."
           name="query"
           class="search-input"
+          title="filter countries by name"
         />
       </search>
-      <select name="search-filter" class="search-filter">
+      <select
+        name="search-filter"
+        class="search-filter"
+        aria-label="filter countries by region"
+      >
         <option value="" selected disabled>Filter by region</option>
         <option value="africa">Africa</option>
         <option value="america">America</option>
