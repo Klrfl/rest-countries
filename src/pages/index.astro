@@ -31,7 +31,9 @@ if (searchFilter) {
   <header class="filters-wrapper">
     <form class="filters-form">
       <search>
-        <button>Search</button>
+        <button title="Click to search for a country">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         <input
           type="search"
           placeholder="Search for a country..."
@@ -71,10 +73,21 @@ if (searchFilter) {
   .filters-form > * {
     border-radius: 0.5rem;
     background: var(--element);
-    padding: 1rem 2rem;
     box-shadow:
       0 1px 5px var(--shadow),
       2px 4px 8px var(--shadow);
+  }
+
+  .filters-form search {
+    padding: 1rem 1rem 1rem 0.5rem;
+  }
+
+  .filters-form search > * {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .search-filter {
+    padding: 1rem 2rem;
   }
 
   .country-list {
