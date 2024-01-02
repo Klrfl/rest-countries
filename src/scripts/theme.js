@@ -21,11 +21,22 @@ function setTheme(targetTheme) {
 document.addEventListener("DOMContentLoaded", () => {
   const preferredTheme = getTheme();
   setTheme(preferredTheme);
-});
 
-const themeSwitcher = document.querySelector(".theme-toggle");
+  const themeSwitcher = document.querySelector(".theme-toggle");
 
-themeSwitcher.addEventListener("click", () => {
-  const theme = getTheme();
-  theme === "dark" ? setTheme("light") : setTheme("dark");
+  themeSwitcher.addEventListener("click", () => {
+    const theme = getTheme();
+    let themeSwitcherIcon = themeSwitcher.children[0];
+    let themeSwitcherText = themeSwitcher.children[1];
+
+    if (theme === "dark") {
+      setTheme("light");
+      themeSwitcherText.innerText = "light mode";
+      themeSwitcherIcon.classList.replace("fa-moon", "fa-sun");
+    } else {
+      setTheme("dark");
+      themeSwitcherText.innerText = "dark mode";
+      themeSwitcherIcon.classList.replace("fa-sun", "fa-moon");
+    }
+  });
 });

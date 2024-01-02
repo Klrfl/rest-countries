@@ -2,6 +2,9 @@ body {
   font-family: "Nunito Sans", Arial, sans-serif;
   background: var(--background);
   color: var(--text);
+  transition:
+    background 200ms ease,
+    color 200ms ease;
 }
 
 :is(input, button, select):hover {
