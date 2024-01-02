@@ -21,6 +21,8 @@ const { country } = Astro.props;
 // borders
 function getBorderingCountriesData() {
   const result = [];
+  if (!country.borders) return result;
+
   for (const borderingCountry of country.borders) {
     data.forEach((country) => {
       if (country.alpha3Code === borderingCountry) result.push(country);
@@ -59,7 +61,13 @@ const borderingCountries = getBorderingCountriesData();
         <p><span>Top level domain:</span> {country.topLevelDomain}</p>
         <p>
           <span>currencies:</span>
-          {country.currencies.map((currency) => currency.name).join(", ")}
+          {
+            country.currencies ? (
+              country.currencies.map((currency) => currency.name).join(", ")
+            ) : (
+              <span>none</span>
+            )
+          }
         </p>
         <p>
           <span>languages:</span>
