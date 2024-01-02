@@ -3,41 +3,72 @@ import data from "../data.json";
 
 import CountryItem from "../components/CountryItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { normalize } from "../scripts/utils";
 const title = "Where in the world?";
+
+const { url } = Astro.request;
+const requestURL = new URL(url);
+const params = new URLSearchParams(requestURL.search);
+const query = params.get("query");
+const searchFilter = params.get("search-filter");
+
+let countries = data;
+
+if (query) {
+  countries = countries.filter((country) =>
+    normalize(country.name).includes(query.toLowerCase()),
+  );
+}
+
+if (searchFilter) {
+  countries = countries.filter(
+    (country) => country.region.toLowerCase() === searchFilter,
+  );
+}
 ---
 
 <BaseLayout {title}>
   <header class="filters-wrapper">
-    <input
-      type="search"
-      placeholder="Search for a country..."
-      name="search-input"
-      class="search-input"
-      required
-    />
-    <select name="search-filter" class="search-filter">
-      <option value="" selected disabled>Filter by region</option>
-      <option value="africa">Africa</option>
-      <option value="america">America</option>
-      <option value="asia">Asia</option>
-      <option value="europe">Europe</option>
-      <option value="oceania">Oceania</option>
-    </select>
+    <form class="filters-form">
+      <search>
+        <button>Search</button>
+        <input
+          type="search"
+          placeholder="Search for a country..."
+          name="query"
+          class="search-input"
+        />
+      </search>
+      <select name="search-filter" class="search-filter">
+        <option value="" selected disabled>Filter by region</option>
+        <option value="africa">Africa</option>
+        <option value="america">America</option>
+        <option value="asia">Asia</option>
+        <option value="europe">Europe</option>
+        <option value="oceania">Oceania</option>
+      </select>
+    </form>
   </header>
 
   <ul class="country-list">
-    {data.map((country) => <CountryItem country={country} />)}
+    {
+      countries.length ? (
+        countries.map((country) => <CountryItem country={country} />)
+      ) : (
+        <li>Sorry, we cannot find a country named "{query}".</li>
+      )
+    }
   </ul>
 </BaseLayout>
 
 <style>
-  .filters-wrapper {
+  .filters-form {
     display: flex;
     justify-content: space-between;
     margin-block-end: 2rem;
   }
 
-  .filters-wrapper > * {
+  .filters-form > * {
     border-radius: 0.5rem;
     background: var(--element);
     padding: 1rem 2rem;
