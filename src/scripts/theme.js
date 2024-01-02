@@ -23,12 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
   setTheme(preferredTheme);
 
   const themeSwitcher = document.querySelector(".theme-toggle");
+  let themeSwitcherIcon = themeSwitcher.children[0];
+  let themeSwitcherText = themeSwitcher.children[1];
+
+  preferredTheme === "dark"
+    ? (themeSwitcherText.innerText = "dark mode")
+    : "light mode";
 
   themeSwitcher.addEventListener("click", () => {
     const theme = getTheme();
-    let themeSwitcherIcon = themeSwitcher.children[0];
-    let themeSwitcherText = themeSwitcher.children[1];
-
     if (theme === "dark") {
       setTheme("light");
       themeSwitcherText.innerText = "light mode";
