@@ -83,7 +83,10 @@ const borderingCountries = getBorderingCountriesData();
               borderingCountries.length ? (
                 borderingCountries.map((country) => (
                   <li>
-                    <a class="border-country" href={slugify(country.name)}>
+                    <a
+                      class="border-country"
+                      href={"/" + slugify(country.name)}
+                    >
                       {country.name}
                     </a>
                   </li>
