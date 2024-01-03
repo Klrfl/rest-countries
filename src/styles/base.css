@@ -15,6 +15,7 @@
  */
 
   --background: var(--very-light-gray);
+  --background-hover: hsl(0deg 0% 0% / 0.15);
   --element: var(--white);
   --text: var(--very-dark-blue);
 
@@ -77,6 +78,10 @@ h6 {
   overflow-wrap: break-word;
 }
 
-:is(button, input, select):is(:focus-visible, :hover) {
+:is(button, input, select):is(:focus-visible) {
   outline: 2px dotted dodgerblue;
+}
+
+:is(button, input, select):is(:hover, :focus-visible) {
+  background: var(--background-hover);
 }
