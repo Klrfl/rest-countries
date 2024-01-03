@@ -34,19 +34,23 @@ if (searchFilter) {
         <button title="Click to search for a country" class="filters-submit">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        <label for="search-input" class="sr-only"
+          >Search for a country by name</label
+        >
         <input
           type="search"
           placeholder="Search for a country..."
           name="query"
+          id="search-input"
           class="search-input"
-          title="filter countries by name"
+          title="search for a country by name"
         />
       </div>
 
       <select
         name="search-filter"
         class="search-filter"
-        aria-label="filter countries by region"
+        aria-label="search for a country by region"
       >
         <option value="" selected disabled>Filter by region</option>
         <option value="africa">Africa</option>
@@ -90,6 +94,15 @@ if (searchFilter) {
 
   .filters-form .search > * {
     padding: 0.25rem 0.5rem;
+  }
+
+  .sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .search-filter {
