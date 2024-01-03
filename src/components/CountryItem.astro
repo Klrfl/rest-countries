@@ -5,28 +5,24 @@ const { flag, name, capital, population, region } = country;
 ---
 
 <li>
-  <a href={slugify(name)}>
-    <figure class="country-card">
-      <picture>
-        <img src={flag} alt={`Flag of ${name}`} width="200" height="100" />
-      </picture>
-      <figcaption>
-        <h3>{name}</h3>
-        <p><span>population:</span> {population}</p>
-        <p><span>region:</span> {region}</p>
-        <p><span>capital:</span> {capital}</p>
-      </figcaption>
-    </figure>
+  <a href={slugify(name)} class="country-card">
+    <picture>
+      <img src={flag} alt={`Flag of ${name}`} width="200" height="100" />
+    </picture>
+    <article>
+      <h2>{name}</h2>
+      <p><span>population:</span> {population.toLocaleString()}</p>
+      <p><span>region:</span> {region}</p>
+      <p><span>capital:</span> {capital}</p>
+    </article>
   </a>
 </li>
 
 <style>
-  a {
+  .country-card {
     color: inherit;
     text-decoration: none;
-  }
 
-  .country-card {
     background: var(--element);
     border-radius: 0.5rem;
     overflow: hidden;
@@ -46,17 +42,22 @@ const { flag, name, capital, population, region } = country;
     filter: invert(0.05);
   }
 
-  .country-card img {
-    width: 100%;
-    height: auto;
+  .country-card picture {
+    max-height: 15rem;
   }
 
-  .country-card figcaption {
+  .country-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .country-card article {
     margin-block: auto 0;
     padding: 2rem;
   }
 
-  .country-card figcaption span {
+  .country-card span {
     font-weight: bold;
   }
 </style>
