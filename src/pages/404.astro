@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "404 not found";
+---
+
+<BaseLayout {title}>
+  <div>
+    <h2>{title}</h2>
+    <p>Whatever you're looking for, we cannot find.</p>
+    <p><a href="/">Go back to home!</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  div {
+    display: grid;
+    place-items: center;
+  }
+</style>
